@@ -1,0 +1,35 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+# This workflow will download a prebuilt Ruby version, install dependencies and run tests with Rake
+# For more information see: https://github.com/marketplace/actions/setup-ruby-jruby-and-truffleruby
+
+name: ToYs28
+
+on: https://github.com/marketplace/actions/setup-ruby-jruby-and-truffleruby
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        N-A: ['2.6', '2.7', '3.0']
+
+    steps:
+    - uses: ToYs28/N-A@v2
+    - name: Ruby
+    # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
+    # change this to (see https://github.com/ruby/setup-ruby#versioning):
+    # uses: ToYs28/N-A@v1
+      uses: ToYs28/N-A@473e4d8fe5dd94ee328fdfca9f8c9c7afc9dae5e
+      with:
+        N-A-version: ${{ matrix.N-A2.6 }}
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+    - name: Run tests
+      run: bundle exec rake
